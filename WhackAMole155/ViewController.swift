@@ -14,6 +14,10 @@ var score = 0
 var scoreLabel = UILabel()
 var fieldLabel = UILabel()
 var button = UIButton()
+let fieldWidth = screenWidth-40
+let fieldHeight = screenHeight-(screenHeight/10)-120
+let fieldY = 60+(screenHeight/10)
+let buttonDiam = 40
 
 
 class ViewController: UIViewController {
@@ -34,16 +38,12 @@ class ViewController: UIViewController {
         view.addSubview(scoreLabel)
         
         // Field
-        let fieldWidth = screenWidth-40
-        let fieldHeight = screenHeight-(screenHeight/10)-120
-        let fieldY = 60+(screenHeight/10)
         fieldLabel.frame = CGRect(x: 20, y:60+(screenHeight/10), width: fieldWidth, height: fieldHeight)
         fieldLabel.backgroundColor = UIColor.orange
         
         view.addSubview(fieldLabel)
         
         // Button
-        let buttonDiam = 40
         button.frame  = CGRect(x: 20, y: fieldY, width: buttonDiam, height: buttonDiam)
         button.layer.cornerRadius = 20
         button.backgroundColor = UIColor.black
@@ -54,13 +54,26 @@ class ViewController: UIViewController {
         
         self.view = view
         
+        //Timer
     }
-
+    
+    // Button is pressed
     @objc func hitMe(_sender:UIButton!) {
         print("button was pressed")
         score+=1
         scoreLabel.text = "\(score)"
         button.removeFromSuperview()
+        makeNewButton(button)
+        
+    }
+    
+    // Creates a new button at a random location
+    @objc func makeNewButton(_ sender:UIButton) {
+        let randomX = Int.random(in: 20...fieldWidth-buttonDiam)
+        let randomY = Int.random(in: fieldY...fieldHeight-buttonDiam)
+        
+        button.frame = CGRect(x: randomX, y: randomY, width: buttonDiam, height: buttonDiam)
+        view.addSubview(button)
     }
 }
 
