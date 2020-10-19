@@ -59,7 +59,7 @@ class ViewController: UIViewController {
     @objc func hitMe(_sender:UIButton!) {
         print("button was pressed")
         score+=1
-        // update the scorelabel
+        scoreLabel.text = "\(score)"
         button.removeFromSuperview()
     }
 }
