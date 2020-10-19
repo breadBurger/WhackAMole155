@@ -12,6 +12,7 @@ var screenWidth = 0
 var screenHeight = 0
 var score = 0
 var scoreLabel = UILabel()
+var fieldLabel = UILabel()
 
 
 class ViewController: UIViewController {
@@ -24,13 +25,18 @@ class ViewController: UIViewController {
         screenHeight = Int(screenBounds.height)
         
         // Score Label
-        scoreLabel.frame = CGRect(x: 20, y: 60, width: 40, height: 40)
+        scoreLabel.frame = CGRect(x:20, y: 60, width: screenWidth-40, height: screenHeight/10)
         scoreLabel.backgroundColor = UIColor.green
         scoreLabel.text = "\(score)"
+        scoreLabel.textAlignment = NSTextAlignment.center;
         
         view.addSubview(scoreLabel)
         
-        //
+        // Field
+        fieldLabel.frame = CGRect(x: 20, y:60+(screenHeight/10), width: screenWidth-40, height: screenHeight-(screenHeight/10)-120)
+        fieldLabel.backgroundColor = UIColor.orange
+        
+        view.addSubview(fieldLabel)
         
         self.view = view
         
