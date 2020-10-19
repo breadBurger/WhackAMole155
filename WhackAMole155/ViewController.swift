@@ -13,6 +13,7 @@ var screenHeight = 0
 var score = 0
 var scoreLabel = UILabel()
 var fieldLabel = UILabel()
+var button = UIButton()
 
 
 class ViewController: UIViewController {
@@ -33,15 +34,32 @@ class ViewController: UIViewController {
         view.addSubview(scoreLabel)
         
         // Field
-        fieldLabel.frame = CGRect(x: 20, y:60+(screenHeight/10), width: screenWidth-40, height: screenHeight-(screenHeight/10)-120)
+        let fieldWidth = screenWidth-40
+        let fieldHeight = screenHeight-(screenHeight/10)-120
+        let fieldY = 60+(screenHeight/10)
+        fieldLabel.frame = CGRect(x: 20, y:60+(screenHeight/10), width: fieldWidth, height: fieldHeight)
         fieldLabel.backgroundColor = UIColor.orange
         
         view.addSubview(fieldLabel)
+        
+        // Button
+        let buttonDiam = 40
+        button.frame  = CGRect(x: 20, y: fieldY, width: buttonDiam, height: buttonDiam)
+        button.layer.cornerRadius = 20
+        button.backgroundColor = UIColor.black
+        button.addTarget(self, action: #selector(hitMe(_sender:)), for: .touchUpInside)
+        
+        view.addSubview(button)
+        
         
         self.view = view
         
     }
 
-
+    @objc func hitMe(_sender:UIButton!) {
+        print("button was pressed")
+        score+=1
+        
+    }
 }
 
