@@ -18,6 +18,7 @@ let fieldWidth = screenWidth-40
 let fieldHeight = screenHeight-(screenHeight/10)-120
 let fieldY = 60+(screenHeight/10)
 let buttonDiam = 40
+var timer = Timer()
 
 
 class ViewController: UIViewController {
@@ -31,7 +32,7 @@ class ViewController: UIViewController {
         
         // Score Label
         scoreLabel.frame = CGRect(x:20, y: 60, width: screenWidth-40, height: screenHeight/10)
-        scoreLabel.backgroundColor = UIColor.green
+        scoreLabel.backgroundColor = UIColor.white
         scoreLabel.text = "\(score)"
         scoreLabel.textAlignment = NSTextAlignment.center;
         
@@ -39,14 +40,14 @@ class ViewController: UIViewController {
         
         // Field
         fieldLabel.frame = CGRect(x: 20, y:60+(screenHeight/10), width: fieldWidth, height: fieldHeight)
-        fieldLabel.backgroundColor = UIColor.orange
+        fieldLabel.backgroundColor = UIColor.green
         
         view.addSubview(fieldLabel)
         
         // Button
         button.frame  = CGRect(x: 20, y: fieldY, width: buttonDiam, height: buttonDiam)
         button.layer.cornerRadius = 20
-        button.backgroundColor = UIColor.black
+        button.backgroundColor = UIColor.brown
         button.addTarget(self, action: #selector(hitMe(_sender:)), for: .touchUpInside)
         
         view.addSubview(button)
@@ -55,6 +56,8 @@ class ViewController: UIViewController {
         self.view = view
         
         //Timer
+        timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(makeNewButton), userInfo: nil, repeats: false)
+        
     }
     
     // Button is pressed
@@ -74,6 +77,9 @@ class ViewController: UIViewController {
         
         button.frame = CGRect(x: randomX, y: randomY, width: buttonDiam, height: buttonDiam)
         view.addSubview(button)
+        
+        timer.invalidate()
+        timer = Timer.scheduledTimer(timeInterval: 5, target:self, selector: #selector(makeNewButton), userInfo: nil, repeats: false)
     }
 }
 
