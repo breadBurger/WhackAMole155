@@ -66,7 +66,12 @@ class ViewController: UIViewController {
         score+=1
         scoreLabel.text = "\(score)"
         button.removeFromSuperview()
-        makeNewButton(button)
+        if score>9 {
+            endGame()
+        }
+        else {
+            makeNewButton(button)
+        }
         
     }
     
@@ -80,6 +85,17 @@ class ViewController: UIViewController {
         
         timer.invalidate()
         timer = Timer.scheduledTimer(timeInterval: 5, target:self, selector: #selector(makeNewButton), userInfo: nil, repeats: false)
+    }
+    
+    //Ends Game
+    @objc func endGame()
+    {
+        timer.invalidate()
+        
+        // Tells the user game has ended
+        fieldLabel.text = "User has reached 10! Game Over"
+        fieldLabel.textAlignment = NSTextAlignment.center
+        
     }
 }
 
